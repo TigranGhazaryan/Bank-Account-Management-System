@@ -66,11 +66,11 @@ bool Customer_Accounts::Transfer_Info_Check(json k, int& i)
     if (k["Customer_Accounts"][i]["CardInfo"]["CardType"] == Card_Type &&
         k["Customer_Accounts"][i]["CardInfo"]["CardNumber"] == Card_Number &&
         k["Customer_Accounts"][i]["CardInfo"]["Valid_Month"] == Valid_Date_Month &&
-        k["Customer_Accounts"][i]["CardInfo"]["Valid_Year"] == Valid_Date_Year)     
-        return true;    
+        k["Customer_Accounts"][i]["CardInfo"]["Valid_Year"] == Valid_Date_Year)
+        return true;
     return false;
 }
-    
+
 //INPUT ACCOUNT INFORMATION
 void Customer_Accounts::InputAccountInfo()
 {
@@ -93,7 +93,7 @@ void Customer_Accounts::InputAccountInfo()
             std::cout << "Invalid month \n";
         else
             break;
-    }    
+    }
     std::cout << "Card Valid Date (Year): ";
     while (std::cin >> Valid_Date_Year)
     {
@@ -169,7 +169,7 @@ void Customer_Accounts::Create_Account(json k, json j)
     system("CLS");
     std::cout << "                                CREATE NEW ACCOUNT	                         \n";
     std::cout << "\nFill in the relevant fields\n";
-    
+
     Customer_Accounts::InputPersonalInfo();
     Customer_Accounts::InputAddressInfo();
     Customer_Accounts::InputAccountInfo();
@@ -180,7 +180,7 @@ void Customer_Accounts::Create_Account(json k, json j)
 
     //Put the Input files into Json Format
     Customer_Accounts::Customer_Information(j["Customer_Information"]);
-    
+
     //Read a file into json format
     Customer_Accounts::Read_Json(k);
 
@@ -214,7 +214,7 @@ void Customer_Accounts::Update_Existing_Account(json k)
         std::cout << "Update Account Balance\n";
         std::cin >> accountBallance;
         Customer_Accounts::Customer_Information(k["Customer_Accounts"][i]);
-       
+
         std::cout << "\nAccount UPDATED SUCCESSFULLY";
     }
     else
@@ -245,7 +245,7 @@ void Customer_Accounts::For_Transactions(json k)
             Customer_Accounts::InputAccountInfo();
             if (!Customer_Accounts::Transfer_Info_Check(k, i))
                 std::cout << "\nAccount Data Doesn't Match";
-              
+
             if (Customer_Accounts::Transfer_Info_Check(k, i))
             {
                 int Transfer{};
@@ -267,8 +267,16 @@ void Customer_Accounts::For_Transactions(json k)
                     {
                         if (k["Customer_Accounts"][i]["accountBalance"] >= Transfer)
                         {
-                            k["Customer_Accounts"][i]["accountBalance"] = k["Customer_Accounts"][i]["accountBalance"] - Transfer;
-                            k["Customer_Accounts"][j]["accountBalance"] = k["Customer_Accounts"][j]["accountBalance"] + Transfer;
+                            int originalAmount{};
+                            int changedAmount{};
+
+                            originalAmount = k["Customer_Accounts"][i]["accountBalance"];
+                            changedAmount = originalAmount - Transfer;
+                            k["Customer_Accounts"][i]["accountBalance"] = changedAmount;
+
+                            originalAmount = k["Customer_Accounts"][j]["accountBalance"];
+                            changedAmount = originalAmount + Transfer;
+                            k["Customer_Accounts"][j]["accountBalance"] = changedAmount;
                             std::cout << "\nTRANSFER COMPLETED SUCCESSFULLY\n";
                             break;
                         }
@@ -279,7 +287,7 @@ void Customer_Accounts::For_Transactions(json k)
                     }
                 }
             }
-           
+
         }
         else
             std::cout << "\nAccount doesn't exist";
@@ -302,13 +310,13 @@ void Customer_Accounts::Check_Existing_Account(json k)
     int i{};
     if (Customer_Accounts::Account_Exists(k, i))
     {
-        std::cout << "      The Account Details For '" 
+        std::cout << "      The Account Details For '"
             << this->firstName << "' '" << this->lastName << "' Are\n";
         std::cout << std::setw(4) << k["Customer_Accounts"][i];
     }
     else
         std::cout << "Account doesn't exist";
-  
+
     Customer_Accounts::Return_to_Page();
 }
 

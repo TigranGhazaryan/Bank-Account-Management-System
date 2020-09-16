@@ -38,6 +38,16 @@ void Customer_Accounts::Read_Json(json& k)
         std::cout << "Unable to open Json\n";
 }
 
+//Clear Screen (OS independent)
+void Customer_Accounts::Clear_screen()
+{
+  #ifdef WINDOWS
+    std::system("cls");
+  #else
+    std::system ("clear");
+  #endif
+}
+
 //Account Verification (name, surname, password)
 void Customer_Accounts::Account_Verification()
 {
@@ -131,7 +141,7 @@ void Customer_Accounts::Customer_Information(json& j)
 //0. Main Page
 void Customer_Accounts::Main_Page()
 {
-    system("CLS");
+    Customer_Accounts::Clear_screen();
     std::cout << "                      CUSTOMER ACCOUNT BANKING MANAGEMENT SYSTEM                   \n";
     std::cout << "                                WELCOME TO THE MAIN MENU	                         \n";
     std::cout << "\n";
@@ -166,7 +176,7 @@ void Customer_Accounts::Return_to_Page()
 //1.CREATE NEW ACCOUNT
 void Customer_Accounts::Create_Account(json k, json j)
 {
-    system("CLS");
+    Customer_Accounts::Clear_screen();
     std::cout << "                                CREATE NEW ACCOUNT	                         \n";
     std::cout << "\nFill in the relevant fields\n";
 
@@ -196,7 +206,7 @@ void Customer_Accounts::Create_Account(json k, json j)
 //2.UPDATE EXISTING ACCOUNT
 void Customer_Accounts::Update_Existing_Account(json k)
 {
-    system("CLS");
+    Customer_Accounts::Clear_screen();
     std::cout << "                                UPDATE EXISTING ACCOUNT	                         \n";
     std::cout << "\nFill in Login Details:";
     Customer_Accounts::Account_Verification();
@@ -226,7 +236,7 @@ void Customer_Accounts::Update_Existing_Account(json k)
 //3. FOR TRANSACTIONS
 void Customer_Accounts::For_Transactions(json k)
 {
-    system("CLS");
+    Customer_Accounts::Clear_screen();
     std::cout << "                                FOR TRANSACTIONS	                         \n";
     std::cout << "\nFill in Login Details:";
     Customer_Accounts::Account_Verification();
@@ -302,7 +312,7 @@ void Customer_Accounts::For_Transactions(json k)
 //4. CHECK ACCOUNT DETAILS
 void Customer_Accounts::Check_Existing_Account(json k)
 {
-    system("CLS");
+    Customer_Accounts::Clear_screen();
     std::cout << "                                CHECK ACCOUNT DETAILS	                         \n";
     std::cout << "\nFill in Login Details:";
     Customer_Accounts::Account_Verification();
@@ -323,7 +333,7 @@ void Customer_Accounts::Check_Existing_Account(json k)
 //5. REMOVE EXISTING ACCOUNT
 void Customer_Accounts::Remove_Existing_Account(json k)
 {
-    system("CLS");
+    Customer_Accounts::Clear_screen();
     std::cout << "                                REMOVE EXISTING ACCOUNT	                         \n";
     std::cout << "\nFill in Login Details:";
     Customer_Accounts::Account_Verification();
@@ -344,7 +354,7 @@ void Customer_Accounts::Remove_Existing_Account(json k)
 //6.PRINT CUSTOMER LIST
 void Customer_Accounts::Print_Customer_List(json k)
 {
-    system("CLS");
+    Customer_Accounts::Clear_screen();
     std::cout << "                                  CUSTOMER LIST	                         \n";
     Customer_Accounts::Read_Json(k);
     for (int i = 0; i < k["Customer_Accounts"].size(); ++i)

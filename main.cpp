@@ -22,9 +22,9 @@ int main()
             C.For_Transactions(k);
         else if (Input == "4")
             C.Check_Existing_Account(k);
-        else  if (Input == "5")
+        else if (Input == "5")
             C.Remove_Existing_Account(k);
-        else  if (Input == "6")
+        else if (Input == "6")
             C.Print_Customer_List(k);
         else if (Input == "7")
             break;

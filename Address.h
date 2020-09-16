@@ -19,13 +19,13 @@ protected:
 		std::cin.ignore();
 		std::getline(std::cin, streetAddress);
 		std::cout << "City: ";
-		//std::cin.ignore();
+		std::cin.ignore();
 		std::getline(std::cin, city);
 		std::cout << "State: ";
-		//std::cin.ignore();
+		std::cin.ignore();
 		std::getline(std::cin, state);
 		std::cout << "Country: ";
-		//std::cin.ignore();
+		std::cin.ignore();
 		std::getline(std::cin, country);
 		std::cout << "Postal Code: ";
 		std::cin >> postal_Code;

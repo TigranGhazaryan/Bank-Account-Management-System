@@ -23,6 +23,7 @@ private:
 	void Return_to_Page();
 	void Add_Json(json k);
 	void Read_Json(json& k);
+	void Clear_screen();
 public:
 	Customer_Accounts();
 	void Main_Page();

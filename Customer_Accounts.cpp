@@ -41,8 +41,8 @@ void Customer_Accounts::Read_Json(json& k)
 //Clear Screen (OS independent)
 void Customer_Accounts::Clear_screen()
 {
-  #ifdef WINDOWS
-    std::system("cls");
+  #ifdef _WIN32
+    std::system("CLS");
   #else
     std::system ("clear");
   #endif
